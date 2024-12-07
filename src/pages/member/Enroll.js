@@ -20,9 +20,10 @@ function Enroll() {
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    const event = e.target;
+    const { name, value } = e.target; // 이벤트에서 name과 value를 추출
     setFormData((prevFormData) => ({
       ...prevFormData,
+      [name]: value, // name에 해당하는 값을 업데이트
     }));
   };
 
@@ -37,9 +38,11 @@ function Enroll() {
     data.append("memAddress", formData.memAddress);
     data.append("memCellphone", formData.memCellphone);
     data.append("memRnn", formData.memRnn);
+    data.append("memType", "ADMIN");
+    data.append("memStatus", "ACTIVE");
 
     try {
-      await axios.post("http://localhost:8888/member", data, {
+      await axios.post("http://localhost:8080/member", data, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -88,6 +91,16 @@ function Enroll() {
               <input
                 type="text"
                 name="memEmail"
+                onChange={handleChange}
+              ></input>
+            </td>
+          </tr>
+          <tr>
+            <td>주소</td>
+            <td>
+              <input
+                type="text"
+                name="memAddress"
                 onChange={handleChange}
               ></input>
             </td>
