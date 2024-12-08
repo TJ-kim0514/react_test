@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode"; // jwt-decode jwt 토큰 사용시 필요한 패키지
+import styles from "./Enroll.module.css";
 
 function Enroll() {
   const [formData, setFormData] = useState({
@@ -57,72 +58,175 @@ function Enroll() {
     }
   };
 
+  const handleGoBack = () => {};
+
   return (
     <div>
+      <h3 style={{ textAlign: "center", color: "#064420" }}>
+        기관 담당자 회원가입
+      </h3>
       <form enctype="multipart/form-data" onSubmit={handleSubmit}>
-        <table>
+        <table className={styles.enrollForm}>
+          <tr className={styles.valuebox}>이름</tr>
           <tr>
-            <td>이름</td>
-            <td>
-              <input type="text" name="memName" onChange={handleChange}></input>
-            </td>
+            <input
+              type="text"
+              name="memName"
+              onChange={handleChange}
+              className={styles.textbox}
+            />
+          </tr>
+          <tr className={styles.valuebox}>아이디</tr>
+          <tr>
+            <input
+              type="text"
+              name="memId"
+              onChange={handleChange}
+              style={{
+                width: "350px",
+                borderStyle: "solid",
+                height: "30px",
+                marginRight: "20px",
+                marginBottom: "10px",
+              }}
+            />
+            <button className={styles.button2}>중복확인</button>
+          </tr>
+          <tr className={styles.valuebox}>비밀번호</tr>
+          <tr>
+            <input
+              type="password"
+              name="memPw"
+              onChange={handleChange}
+              className={styles.textbox}
+              style={{ marginBottom: "0" }}
+            />
+          </tr>
+          <tr
+            style={{
+              textAlign: "left",
+              fontSize: "10px",
+              color: "red",
+              height: "20px",
+            }}
+          >
+            대소문자, 숫자, 특수문자 포함 8 ~ 16자로 입력해주세요.
+          </tr>
+          <tr className={styles.valuebox}>비밀번호 확인</tr>
+          <tr>
+            <input
+              type="password"
+              className={styles.textbox}
+              style={{ marginBottom: "0" }}
+            />
+          </tr>
+          <tr
+            style={{
+              textAlign: "left",
+              fontSize: "10px",
+              color: "red",
+              height: "20px",
+            }}
+            name="pwdCheck"
+          ></tr>
+          <tr className={styles.valuebox}>이메일</tr>
+          <tr>
+            <input
+              type="email"
+              name="memEmail"
+              onChange={handleChange}
+              className={styles.textbox}
+            />
+          </tr>
+          <tr className={styles.valuebox}>주소</tr>
+          <tr>
+            <input
+              type="text"
+              name="memAddress"
+              onChange={handleChange}
+              className={styles.textbox}
+            />
+          </tr>
+          <tr className={styles.valuebox}>주민등록번호</tr>
+          <tr>
+            <input
+              type="text"
+              name="memRnn"
+              onChange={handleChange}
+              className={styles.textbox}
+            />
+          </tr>
+          <tr className={styles.valuebox}>기관 코드</tr>
+          <tr>
+            <input
+              type="text"
+              name=""
+              onChange={handleChange}
+              className={styles.textbox}
+              style={{ width: "350px" }}
+            />
+            <button
+              className={styles.button2}
+              style={{
+                marginLeft: "20px",
+              }}
+            >
+              검색
+            </button>
+          </tr>
+          <tr className={styles.valuebox}>휴대전화</tr>
+          <tr>
+            <input
+              type="text"
+              name="memCellphone"
+              onChange={handleChange}
+              className={styles.textbox}
+              placeholder="'-' 없이 입력"
+              style={{ width: "350px" }}
+            />
+            <button
+              className={styles.button2}
+              style={{
+                marginLeft: "20px",
+              }}
+            >
+              인증번호 받기
+            </button>
           </tr>
           <tr>
-            <td>아이디</td>
-            <td>
-              <input type="text" name="memId" onChange={handleChange}></input>
-            </td>
+            <input
+              type="text"
+              name="memCellphoneCheck"
+              onChange={handleChange}
+              className={styles.textbox}
+              placeholder="인증번호 입력"
+              style={{ width: "350px" }}
+            />
+            <button
+              className={styles.button2}
+              style={{
+                marginLeft: "20px",
+              }}
+            >
+              인증
+            </button>
           </tr>
           <tr>
-            <td>비밀번호</td>
-            <td>
-              <input type="text" name="memPw" onChange={handleChange}></input>
-            </td>
-          </tr>
-          <tr>
-            <td>비밀번호 확인</td>
-            <td>
-              <input type="text"></input>
-            </td>
-          </tr>
-          <tr>
-            <td>이메일</td>
-            <td>
-              <input
-                type="text"
-                name="memEmail"
-                onChange={handleChange}
-              ></input>
-            </td>
-          </tr>
-          <tr>
-            <td>주소</td>
-            <td>
-              <input
-                type="text"
-                name="memAddress"
-                onChange={handleChange}
-              ></input>
-            </td>
-          </tr>
-          <tr>
-            <td>주민등록번호</td>
-            <td>
-              <input type="text" name="memRnn" onChange={handleChange}></input>
-            </td>
-          </tr>
-          <tr>
-            <td>휴대전화</td>
-            <td>
-              <input
-                type="text"
-                name="memCellphone"
-                onChange={handleChange}
-              ></input>
-            </td>
+            <button
+              className={styles.button1}
+              onClick={handleGoBack}
+              style={{ backgroundColor: "#d9d9d9", color: "#333333" }}
+            >
+              이전
+            </button>
+            <input
+              type="submit"
+              value="가입"
+              className={styles.button1}
+              style={{ marginLeft: "90px" }}
+            />
           </tr>
         </table>
-        <input type="submit" value="가입" />
       </form>
     </div>
   );
